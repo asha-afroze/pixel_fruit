@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script src="js-file.js" defer></script>
+</head>
+<body>
+
+    
+    <h1>My Etch-a-Sketch</h1>
+    <div class = "container">
+        <div class = "grid-container">
+            <h2 style = "text-align: center">Let's Draw!</h2>
+            <div class = "canvas">  
+            </div>
+        </div>
+
+        <div class = "options">
+
+            <button>Adjust Pixel Size</button>
+            <input type = "range" value = "2" min = "2" max = "100" oninput = "this.nextElementSibling.value = this.value" id = "pixelSize">
+            <p>Value: <span id="rangeValue"></span></p>
+
+            
+            <button'>Color</button>
+            <input type = "color" id = "color">
+            <p>RGB Value: <span id="colorValue"></span></p>
+
+            <button id = 'drawMode'>Draw Mode</button>
+            <button id = 'rainbow'>Rainbow Mode</button>
+            <button id = 'darken'>Darken Mode</button>
+
+            
+
+            <button id = 'eraser'>Eraser</button>
+            <button id = 'clear'>Clear Grid</button>
+            <button id = 'addLines'>Add Gridlines</button>
+
+
+
+        </div>
+
+    </div>
+</body>
+</html>
