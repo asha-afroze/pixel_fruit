@@ -1,13 +1,23 @@
+
+
 @font-face {
-  font-family: 'MyCustomFont'; /* Choose a name for your font */
+  font-family: 'PixelBig1'; /* Choose a name for your font */
   src: url('fonts/Daydream DEMO.otf') format('opentype'); /* Specify the path and format */
   font-weight: normal; /* Define weight and style if applicable */
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Pixel2';
+  src: url('ari-w9500.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; /* Optimization: shows fallback font until custom font loads */
+}
+
 
 h1{
-    font-family: 'MyCustomFont', sans-serif;
+    font-family: 'PixelBig1', sans-serif;
 
     text-align: center;
     transition:
@@ -19,6 +29,10 @@ h1{
         opacity: 0.1;
     /* creates a fade in text animation */
 }
+}
+
+h2 {
+    font-family: 'Pixel2', sans-serif;
 }
 
 /* h1:hover{
