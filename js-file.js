@@ -9,6 +9,7 @@ const eraser = document.getElementById('eraser');
 const darken = document.getElementById('darken')
 const draw = document.getElementById('drawMode');
 const rainbow = document.getElementById('rainbow');
+const guessDraw = document.getElementById('guessDraw!');
 
 
 canvas.style.display = "flex";
@@ -17,6 +18,7 @@ canvas.style.flexWrap = "wrap";
 let colorClick = false;
 let eraserClick = false;
 let rainbowCLick = false;
+let guessClick = false;
 let drawClick = true; // default to draw mode
 
 // 🎨 Update color text preview
@@ -39,7 +41,6 @@ eraser.addEventListener("click", function() {
   drawClick = false;
   colorClick = false;
   rainbowClick = false;
-  darkenClick = false;
 });
 
 // ✏️ Draw mode
@@ -47,7 +48,6 @@ draw.addEventListener("click", function() {
   drawClick = true;
   eraserClick = false;
   rainbowClick = false;
-  darkenClick = false;
 });
 
 // ✏️ Rainbow mode
@@ -55,8 +55,15 @@ rainbow.addEventListener("click", function() {
   drawClick = false;
   rainbowClick = true;
   eraserClick = false;
-  darkenClick = false;
 });
+
+// Guessing drawing
+guessDraw.addEventListener("click", function() {
+  drawClick = false;
+  guessClick = true;
+  rainbowCLick = false;
+  eraserClick = false;
+})
 
 // 🧮 Display slider value
 displayPixels.textContent = pixelInput.value;
