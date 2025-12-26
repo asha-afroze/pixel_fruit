@@ -15,26 +15,33 @@
     <div class = "container">
         <div class = "grid-container">
             <h2 style = "text-align: center">Let's Draw!</h2>
-            <div class = "canvas" id="captureArea">  
-            </div>
+            <div class = "canvas" id="captureArea"></div>
         </div>
 
-        <div class = "options">
+    <div class = "options">
 
-            <p>Adjust Pixel Size</p>
-            <input type = "range" value = "2" min = "2" max = "100" oninput = "this.nextElementSibling.value = this.value" id = "pixelSize">
-            <p>Value: <span id="rangeValue"></span></p>
+        <p>Adjust Pixel Size</p>
+        <input type = "range" value = "2" min = "2" max = "100" oninput = "this.nextElementSibling.value = this.value" id = "pixelSize">
+        <p>Value: <span id="rangeValue"></span></p>
 
+        <div class = "main-buttons">
             
-            <button'>Color</button>
-            <input type = "color" id = "color">
-            <p>RGB Value: <span id="colorValue"></span></p>
+            <div class = "buttons1">
+                <label for="color" class="custom-color-picker">
+                    <input type = "color" id = "color">
+                </label>
+                <button id = 'drawMode'><img src = images/pencil.png alt = "pencil"></button>
+                <button id = 'rainbow'><img src = images/rainbow.png alt = "rainbow"></button>
+            </div>
 
-            <button id = 'drawMode'>Draw Mode</button>
-            <button id = 'rainbow'>Rainbow Mode</button>
-            <button id = 'eraser'>Eraser</button>
-            <button id = 'clear'>Clear Grid</button>
-            <button id = 'addLines'>Add Gridlines</button>
+            <div class = "buttons2">
+                <button id = 'eraser'><img src = images/eraser.png alt = "eraser"></button>
+                <button id = 'clear'><img src = images/trash.png alt = "trash bin"></button>
+                <button id = 'addLines'><img src = images/ruler.png alt = "ruler"></button>
+            </div>
+
+        </div>
+
             <button id = 'guessDraw'>Guess Drawing!</button>
             <div id="guessResult"></div>
         </div>

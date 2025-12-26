@@ -1,21 +1,19 @@
 from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from transformers import ViTFeatureExtractor, ViTForImageClassification
-from PIL import Image
+from PIL import Image, ImageFilter
 import io
 
 # Initialize FastAPI app
 app = FastAPI()
 
 # --- CORS Middleware ---
-# This is crucial for allowing the frontend (running on a different port)
-# to communicate with this backend.
 origins = [
     "http://localhost",
-    "http://localhost:8080", # Add the port your frontend is served on if needed
+    "http://localhost:8080",
     "http://127.0.0.1",
-    "http://127.0.0.1:5500", # Often used by VS Code Live Server
-    "null", # To allow requests from local file system (file://)
+    "http://127.0.0.1:5500",
+    "null",
 ]
 
 app.add_middleware(
@@ -27,13 +25,11 @@ app.add_middleware(
 )
 
 # --- Model Loading ---
-# Load the pre-trained Vision Transformer model and its feature extractor.
-# This happens once when the server starts up.
-model_name = 'ilyesdjerfaf/vit-base-patch16-224-in21k-quickdraw'
+model_name = 'google/vit-base-patch16-224'
 feature_extractor = ViTFeatureExtractor.from_pretrained(model_name)
 model = ViTForImageClassification.from_pretrained(model_name)
 
-print("Model loaded successfully!")
+print(f"Model '{model_name}' loaded successfully!")
 
 # --- API Endpoints ---
 @app.get("/")
@@ -43,30 +39,38 @@ def read_root():
 @app.post("/guess")
 async def guess_drawing(file: UploadFile = File(...)):
     """
-    Receives an image file, processes it, and returns the model's top guess.
+    Receives an image file, pre-processes it for better accuracy,
+    and returns the model's top guess.
     """
-    # 1. Read the image data from the upload
     contents = await file.read()
     
-    # 2. Open the image using Pillow
     try:
         image = Image.open(io.BytesIO(contents))
-        # Ensure image is in RGB format, as the model expects it
         if image.mode != "RGB":
             image = image.convert("RGB")
+
+        # --- Pre-processing for Pixelated Drawings ---
+        # 1. Upscale the image to the model's expected size (224x224)
+        #    using a high-quality filter to start the smoothing process.
+        image = image.resize((224, 224), Image.Resampling.LANCZOS)
+
+        # 2. Apply a gentle Gaussian blur to soften the hard pixel edges,
+        #    making the drawing look more like the data the model was trained on.
+        image = image.filter(ImageFilter.GaussianBlur(radius=1.5))
+        # --- End of Pre-processing ---
+
     except Exception as e:
         return {"error": f"Failed to open or process image: {str(e)}"}
 
-    # 3. Use the feature extractor to prepare the image for the model
+    # Use the feature extractor to prepare the image for the model
     inputs = feature_extractor(images=image, return_tensors="pt")
 
-    # 4. Make a prediction
+    # Make a prediction
     outputs = model(**inputs)
     logits = outputs.logits
 
-    # 5. Get the top prediction
+    # Get the top prediction
     predicted_class_idx = logits.argmax(-1).item()
     prediction = model.config.id2label[predicted_class_idx]
 
-    # 6. Return the result
     return {"guess": prediction}
