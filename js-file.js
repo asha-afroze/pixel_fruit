@@ -26,7 +26,6 @@ colorInput.addEventListener("input", function() {
   colorText.textContent = colorInput.value;
 });
 
-let darkenClick = false;
  
 // 🎨 Set color mode
 colorInput.addEventListener("click", function() {
@@ -63,6 +62,7 @@ guessDraw.addEventListener("click", function() {
   guessClick = true;
   rainbowCLick = false;
   eraserClick = false;
+  colorClick = false;
 })
 
 // 🧮 Display slider value

@@ -1,4 +1,14 @@
+@font-face {
+  font-family: 'MyCustomFont'; /* Choose a name for your font */
+  src: url('fonts/Daydream DEMO.otf') format('opentype'); /* Specify the path and format */
+  font-weight: normal; /* Define weight and style if applicable */
+  font-style: normal;
+}
+
+
 h1{
+    font-family: 'MyCustomFont', sans-serif;
+
     text-align: center;
     transition:
         opacity 5s,
