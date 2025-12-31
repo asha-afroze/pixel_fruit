@@ -1,0 +1,37 @@
+.canvas {
+    display: flex;
+    flex-wrap: wrap; 
+    border: solid 3px #1a1818;
+    width: 600px;
+    height: 600px;
+    margin: 0px 50px 50px 50px;
+    gap:0;
+}
+
+
+
+
+.square {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  border: none;
+  position: relative;
+}
+
+
+.color-palette-container {
+  display: flex;
+  margin-bottom: 20px;
+  border: black 1px solid;
+
+}
+
+.color-box {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform 0.2s, border-color 0.2s;
+}

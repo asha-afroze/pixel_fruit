@@ -1,3 +1,6 @@
+body {
+  background: linear-gradient(rgb(252, 255, 229), rgb(255, 255, 255));
+}
 
 
 @font-face {
@@ -10,6 +13,12 @@
 
 h1{
     font-family: 'PixelBig1', sans-serif;
+    color: rgb(194, 88, 162);
+    padding-bottom: 15px;
+    border-bottom: #130e0e solid 1px;
+    background: linear-gradient(rgb(252, 255, 229), rgb(239, 180, 217));
+    text-shadow: 2px 2px darkred;
+    box-shadow: 0 8px 10px rgba(123, 28, 115, 0.627);
 
     text-align: center;
     transition:
@@ -26,6 +35,7 @@ h1{
 h2 {
     font-family: 'PixelBig1', sans-serif;
     color: rgb(175, 106, 167);
+    text-align: center;
 }
 
 /* h1:hover{
@@ -38,7 +48,7 @@ h2 {
     display: flex;
     flex-direction: row;
     gap: 50px;
-    margin-bottom: 20px;
+    align-items: center;
 }
 
 .buttons1,
@@ -51,6 +61,32 @@ h2 {
 }
 
 
+.color-palette-container {
+  display: flex;
+  margin-bottom: 20px;
+  border: black 1px solid;
+  gap: 1px;
+
+
+}
+
+.color-box {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.color-box:hover {
+  transform: scale(1.5);
+}
+
+/* .color-box.active {
+  border-color: #333; /* Highlights the selected color 
+} 
+
+*/
 
 .custom-color-picker {
   /* Style the label to look like your desired color picker swatch */
@@ -80,7 +116,7 @@ h2 {
 
 }
 
-#drawMode, #rainbow, #eraser, #clear, #addLines {
+#drawMode, #rainbow, #eraser, #clear, #addLines, #guessDraw {
   /* Remove default button styling */
   background: none;
   border: none;
@@ -93,21 +129,22 @@ h2 {
   /* border: #1a1818 solid 1px; */
 }
 
-#drawMode img, #rainbow img, #eraser img, #clear img, #addLines img {
+#drawMode img, #rainbow img, #eraser img, #clear img, #addLines img, #guessDraw img {
   /* Make the icon fill the button nicely */
   width: 100%;
   height: 100%;
   display: block;
 }
 
-.tool-button {
+.tool-button, .guess-button {
+  display: flex;
   position: relative;
   width: 80px;
   aspect-ratio: 1 / 1;
 }
 
 /* label styling */
-.tool-button .label {
+.tool-button .label, .guess-button .label {
     position: absolute;
     inset: 0; /* fills the container */
     display: flex;
@@ -123,45 +160,44 @@ h2 {
 
     opacity: 0;
     pointer-events: none; /* label doesn’t block clicks */
-    transition: opacity 0.2s ease;
+    transition: opacity 0.1s ease;
 }
 
 /* icon transition */
-.tool-button img {
-  transition: opacity 0.2s ease;
+.tool-button img , .guess-button img{
+  transition: opacity 0.1s ease;
 }
 
 /* hover effect */
-.tool-button:hover img {
+.tool-button:hover img , .guess-button:hover img{
   opacity: 0.35;
+
 }
 
-.tool-button:hover .label {
+.tool-button:hover .label, .guess-button:hover .label {
   opacity: 1;
 }
-
-
-
-
 
 .grid-container {
     display: flex;
     flex-direction: column;
-    border: solid 1px black;
-    border-radius: 10%;
-    margin-left: 150px;
+    border: solid 2px rgb(255, 255, 255);
+    background-color: rgb(253, 214, 244);
+    box-shadow: 0 8px 16px rgba(123, 28, 115, 0.627);
+    border-radius: 5%;
     margin-top: 50px;
 }
 
 .canvas {
     display: flex;
     flex-wrap: wrap; 
-    border: solid 2px #1a1818;
+    border: solid 2px #32232375;
     width: 600px;
     height: 600px;
     margin: 0px 50px 50px 50px;
     gap:0;
-    background-image: url(images/sketchpaper.jpg);
+    background-color: white;
+    /* background-image: url(images/sketchpaper.jpg); */
 
     /* Optional: Further properties for better control */
     background-repeat: no-repeat; /* Prevents the image from tiling */
@@ -201,6 +237,26 @@ h2 {
 .canvas.show-lines .square {
   border: 1px solid rgb(219, 219, 219);
 }
+
+.ai-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 50px;
+  /* margin-top: 100px; */
+}
+
+.fruit-images {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.fruit-images img {
+  width: 50px;
+}
+
 
 
 

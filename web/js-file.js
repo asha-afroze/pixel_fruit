@@ -9,6 +9,10 @@ const eraser = document.getElementById('eraser');
 const draw = document.getElementById('drawMode');
 const rainbow = document.getElementById('rainbow');
 const guessDraw = document.getElementById('guessDraw');
+const paletteColor = document.querySelector(".color-box");
+const save = document.getElementById('save');
+
+
 
 canvas.style.display = "flex";
 canvas.style.flexWrap = "wrap";
@@ -17,11 +21,13 @@ let colorClick = false;
 let eraserClick = false;
 let rainbowClick = false;
 let drawClick = true; // default to draw mode
+let colorMode = false;
+
 
 // 🎨 Update color text preview
-colorInput.addEventListener("input", function() {
-  colorText.textContent = colorInput.value;
-});
+// colorInput.addEventListener("input", function() {
+//   colorText.textContent = colorInput.value;
+// });
 
  
 // 🎨 Set color mode
@@ -30,6 +36,7 @@ colorInput.addEventListener("click", function() {
   drawClick = true;
   eraserClick = false;
   rainbowClick = false;
+  colorMode = false;
 });
 
 // 🧽 Eraser mode
@@ -38,6 +45,7 @@ eraser.addEventListener("click", function() {
   drawClick = false;
   colorClick = false;
   rainbowClick = false;
+  colorMode = false;
 });
 
 // ✏️ Draw mode
@@ -45,6 +53,7 @@ draw.addEventListener("click", function() {
   drawClick = true;
   eraserClick = false;
   rainbowClick = false;
+  colorMode = false;
 });
 
 // 🌈 Rainbow mode
@@ -52,7 +61,21 @@ rainbow.addEventListener("click", function() {
   drawClick = false;
   rainbowClick = true;
   eraserClick = false;
+  colorMode = false;
 });
+
+let selectedColor = " #000000";
+
+document.querySelectorAll('.color-box').forEach(box => {
+  box.addEventListener('click', () => {
+    colorMode = true;
+    rainbowClick = false;
+    eraserClick = false;
+    drawClick = true; 
+    selectedColor = box.dataset.color;
+  });
+});
+
 
 // 📸 Guess Drawing
 guessDraw.addEventListener("click", function() {
@@ -151,7 +174,11 @@ canvas.addEventListener("mousedown", (e) => {
 
   const square = e.target;
 
-  if (drawClick) {
+  if (colorMode) {
+    square.style.backgroundColor = selectedColor;
+    square.style.opacity = 1;
+  }
+  else if (drawClick) {
     square.style.backgroundColor = colorClick ? colorInput.value : "#000";
     square.style.opacity = 1;
   } 
@@ -172,7 +199,11 @@ canvas.addEventListener("mousemove", (e) => {
 
   const square = e.target;
 
-  if (drawClick) {
+  if (colorMode) {
+    square.style.backgroundColor = selectedColor;
+    square.style.opacity = 1; 
+  }
+  else if (drawClick) {
     square.style.backgroundColor = colorClick ? colorInput.value : "#000";
     square.style.opacity = 1;
   } 
@@ -184,6 +215,29 @@ canvas.addEventListener("mousemove", (e) => {
     square.style.backgroundColor = getRandomRgbColor();
     square.style.opacity = 1;
   }
+});
+
+save.addEventListener("click", function() {
+  const captureArea = document.getElementById('captureArea');
+
+  html2canvas(captureArea).then(canvas => {
+    // Convert the canvas to a Blob object
+    canvas.toBlob(function(blob) {
+      // Create a download link
+      const link = document.createElement('a');
+      const url = URL.createObjectURL(blob);
+      
+      link.href = url;
+      link.download = 'pixelsketch_drawing.png'; // Name of the downloaded file
+      
+      // Trigger the download
+      link.click();
+      // Clean up the URL object
+      URL.revokeObjectURL(url);
+    
+
+    }, 'image/png');
+  });
 });
 
 // 👇 Create the initial grid when page loads

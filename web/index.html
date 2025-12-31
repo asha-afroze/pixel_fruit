@@ -12,7 +12,27 @@
 
     
     <h1>Pixel Sketch</h1>
+
     <div class = "container">
+        <div class = "ai-container">
+            <h2>AI Fruit Guesser</h2>
+            <div class = "guess-button">
+                <button id = 'guessDraw'><img src = images/mysterybox.png alr = "mystery box"></button>
+                <span class="label">Guess Fruit</span>
+                <!-- <div id="guessResult"></div> -->
+            </div>
+            <p style = "font-family: monospace;">Draw one of the five fruits below and the AI will try to guess it!</p>
+            <div class = "fruit-images">
+                <img src = images/applepixel.png alt = "apple">
+                <img src = images/bananapixel.png alt = "banana">
+                <img src = images/cherrypixel.png alt = "cherry">
+                <img src = images/pearpixel.png alt = "pear">
+                <img src = images/strawberrypixel.png alt = "strawberry">
+            </div>
+            <p style = "font-family: monospace;">Let's see if you're a good artist...</p>
+
+
+        </div>
         <div class = "grid-container">
             <h2 style = "text-align: center">Let's Draw!</h2>
             <div class = "canvas" id="captureArea"></div>
@@ -24,53 +44,79 @@
         <input type = "range" value = "2" min = "2" max = "100" oninput = "this.nextElementSibling.value = this.value" id = "pixelSize">
         <p>Value: <span id="rangeValue"></span></p> -->
         <h2>Tool Board</h2>
+        <div class="color-palette-container" id="colorPalette">
+            <div>
+                <div class="color-box" data-color="#d03917" style="background-color: #d03917;"></div>
+                <div class="color-box" data-color="#e38520" style="background-color: #e38520;"></div>
+                <div class="color-box" data-color="#f0e141" style="background-color: #f0e141;"></div>
+                <div class="color-box" data-color="#61d34d" style="background-color: #61d34d;"></div>
+            </div>
+
+            <div>
+                <div class="color-box" data-color="#25af78" style="background-color: #25af78;"></div>
+                <div class="color-box" data-color="#3dcbd0" style="background-color: #3dcbd0;"></div>
+                <div class="color-box" data-color="#386fcd" style="background-color: #386fcd;"></div>
+                <div class="color-box" data-color="#3232cf" style="background-color: #3232cf;"></div>
+            </div>
+
+            <div>
+                <div class="color-box" data-color="#8828ab" style="background-color: #8828ab;"></div>
+                <div class="color-box" data-color="#d37bfc" style="background-color: #d37bfc;"></div>
+                <div class="color-box" data-color="#f07fdd" style="background-color: #f07fdd;"></div>
+                <div class="color-box" data-color="#6e3e45" style="background-color: #6e3e45;"></div>
+            </div>
+
+            <div>
+                <div class="color-box" data-color="#3c292e" style="background-color: #3c292e;"></div>
+                <div class="color-box" data-color="#000000" style="background-color: #000000;"></div>
+                <div class="color-box" data-color="#787878" style="background-color: #787878;"></div>
+                <div class="color-box" data-color="#ffffff" style="background-color: #ffffff;"></div>
+            </div>
+        </div>
         <div class = "main-buttons">
+            <div class = "toolboard">
             
-            <div class = "buttons1">
+                <div class = "buttons1">
 
-                <div class = "tool-button">
-                    <label for="color" class="custom-color-picker">
-                        <input type = "color" id = "color">
-                    </label>
-                    <span class="label">Color</span>
+                    <div class = "tool-button">
+                        <label for="color" class="custom-color-picker">
+                            <input type = "color" id = "color">
+                        </label>
+                        <span class="label">Color</span>
+                    </div>
+
+                    <div class = "tool-button">
+                        <button id = 'drawMode'><img src = images/pencil.png alt = "pencil"></button>
+                        <span class="label">Draw!</span>
+                    </div>
+
+                    <div class = "tool-button">
+                        <button id = 'rainbow'><img src = images/rainbow.png alt = "rainbow"></button>
+                        <span class="label">Rainbow Mode</span>
+                    </div>
                 </div>
 
-                <div class = "tool-button">
-                    <button id = 'drawMode'><img src = images/pencil.png alt = "pencil"></button>
-                    <span class="label">Draw!</span>
-                </div>
 
-                <div class = "tool-button">
-                    <button id = 'rainbow'><img src = images/rainbow.png alt = "rainbow"></button>
-                    <span class="label">Rainbow Mode</span>
+
+                <div class = "buttons2">
+                    <div class="tool-button">
+                        <button id = 'eraser'><img src = images/eraser.png alt = "eraser"></button>
+                        <span class="label">Eraser</span>
+                    </div>
+
+                    <div class="tool-button">
+                        <button id = 'clear'><img src = images/trash.png alt = "trash bin"></button>
+                        <span class="label">Clear Grid</span>
+                    </div>
+
+                    <div class="tool-button">
+                        <button id = 'addLines'><img src = images/ruler.png alt = "ruler"></button>
+                        <span class="label">Add Gridlines</span>
+                    </div>
                 </div>
+                <div style = "text-align: center; font-family: monospace; border: rgb(37, 28, 28) solid 1px; border-radius: 3%; background-color: cornsilk; display: flex;" id = "save">Save Drawing! (png)</div>
+
             </div>
-
-
-
-            <div class = "buttons2">
-                <div class="tool-button">
-                    <button id = 'eraser'><img src = images/eraser.png alt = "eraser"></button>
-                    <span class="label">Eraser</span>
-                </div>
-
-                <div class="tool-button">
-                    <button id = 'clear'><img src = images/trash.png alt = "trash bin"></button>
-                    <span class="label">Clear Grid</span>
-                </div>
-
-                <div class="tool-button">
-                    <button id = 'addLines'><img src = images/ruler.png alt = "ruler"></button>
-                    <span class="label">Add Gridlines</span>
-                </div>
-
-            </div>
-
-        </div>
-
-            <button id = 'guessDraw'>Guess Drawing!</button>
-            <div id="guessResult"></div>
-        </div>
     </div>
 </body>
 </html>
