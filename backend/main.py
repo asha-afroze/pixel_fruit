@@ -27,7 +27,14 @@ app.add_middleware(
 # -----------------------
 # Load your trained model
 # -----------------------
-model = tf.keras.models.load_model("fruit_model.keras")
+model = tf.keras.models.load_model("fruit_model.keras", compile=False)
+
+# Recompile with current Keras version
+model.compile(
+    optimizer='adam',
+    loss='sparse_categorical_crossentropy',
+    metrics=['accuracy']
+)
 print("✅ Fruit model loaded")
 
 CLASS_NAMES = [
