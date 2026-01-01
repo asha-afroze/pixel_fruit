@@ -1,4 +1,4 @@
-# 🍎 Pixel Fruit - Drawing-Based Fruit Recognition App 2025
+# 🍎 Pixel Fruit - Drawing-Based Fruit Recognition Web App
 
 An interactive pixel drawing web application that recognizes hand-drawn fruit sketches using a machine learning model served through a FastAPI backend that uses a database of 500+ pixel drawn images of fruits by me! Built the dynamic frontend canvas using HTML, CSS, and JavaScript with drawing, color selection, and erasing tools. Integrated frontend and backend via REST APIs and Python.
 
@@ -44,7 +44,7 @@ This project was created as an end-to-end exploration of AI application developm
 
 ### 📸 Screenshots
 ![Screenshot 1 of Live Website](web/images/pixelart_screenshot.png)
-![Screenshot 2 of Live Website](web/images/pixelart_screenshot2.png)
+![Screenshot 2 of Live Website](web/images/pixelsketch_screenshot2.png)
 
 
 ## 🚀 Getting Started Guide
@@ -63,6 +63,7 @@ Required Python libraries:
 - transformers
 - torch
 - Pillow
+- tensorflow
  
 
 ---
@@ -78,19 +79,20 @@ cd backend/
 
 ```
 
-2. Install dependencies:
-
-```
-pip install -r requirements.txt
-
-```
-
-3. Create and activate a virtual environment:
+2. Create and activate a virtual environment:
 
 ```
 python3.10 -m venv env
 source env/bin/activate   # macOS/Linux
 env\Scripts\activate     # Windows
+
+```
+
+
+3. Install dependencies:
+
+```
+pip install -r requirements.txt
 
 ```
 
